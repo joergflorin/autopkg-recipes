@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Description</key>
+    <string>Downloads latest Cubase 8 update image.</string>
+    <key>Identifier</key>
+    <string>com.github.joergflorin.download.Cubase8Update</string>
+    <key>Input</key>
+    <dict>
+        <key>NAME</key>
+        <string>Cubase 8 Update</string>
+        <key>SEARCH_URL</key>
+        <string>http://www.steinberg.net/index.php?id=downloads_cubase_pro_8&amp;L=1</string>
+        <key>SEARCH_PATTERN</key>
+        <string>(http:\/\/download\.steinberg\.net\/downloads_software\/Cubase_Pro_8_and_Cubase_Artist_8\/[0-9\.]+\/Mac\/Cubase_[0-9\.]+_Update_mac\.dmg)</string>
+        
+    </dict>
+    <key>MinimumVersion</key>
+    <string>0.2.0</string>
+    <key>Process</key>
+    <array>
+        <dict>
+            <key>Processor</key>
+            <string>URLTextSearcher</string>
+            <key>Arguments</key>
+            <dict>
+                <key>url</key>
+                <string>%SEARCH_URL%</string>
+                <key>re_pattern</key>
+                <string>%SEARCH_PATTERN%</string>
+             </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>URLDownloader</string>
+            <key>Arguments</key>
+            <dict>
+                <key>url</key>
+                <string>%match%</string>
+                <key>filename</key>
+                <string>%NAME%.dmg</string>
+            </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>EndOfCheckPhase</string>
+        </dict>
+    </array>
+</dict>
+</plist>

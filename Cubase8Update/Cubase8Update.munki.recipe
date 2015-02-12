@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads latest Cubase 8 update installer package and imports into Munki.</string>
+	<key>Identifier</key>
+	<string>com.github.joergflorin.munki.Cubase8Update</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>Cubase 8 Update</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>apps/steinberg</string>
+        <key>DESCRIPTION</key>
+        <string>Update Cubase 8 Pro Digital Audio Workstation</string>
+        <key>DISPLAY_NAME</key>
+        <string>%NAME%</string>
+        <key>DEVELOPER</key>
+        <string>Steinberg Media Technologies GmbH</string>
+        <key>CATEGORY</key>
+        <string>Musik</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+			<key>description</key>
+			<string>%DESCRIPTION%</string>
+			<key>display_name</key>
+			<string>%DISPLAY_NAME%</string>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>unattended_install</key>
+			<true/>
+			<key>developer</key>
+			<string>%DEVELOPER%</string>
+			<key>category</key>
+			<string>%CATEGORY%</string>
+		</dict>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>0.3.0</string>
+	<key>ParentRecipe</key>
+	<string>com.github.joergflorin.download.Cubase8Update</string>
+	<key>Process</key>
+	<array>
+		<dict>
+            <key>Processor</key>
+            <string>MunkiImporter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_path</key>
+				<string>%pathname%</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
+				<key>version_comparison_key</key>
+				<string>CFBundleVersion</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>

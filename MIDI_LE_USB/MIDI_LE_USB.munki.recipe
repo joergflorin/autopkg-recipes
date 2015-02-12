@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Description</key>
+    <string>Downloads latest MIDI LE USB app archive and imports into Munki.</string>
+    <key>Identifier</key>
+    <string>com.github.joergflorin.munki.MIDI_LE_USB</string>
+    <key>Input</key>
+    <dict>
+        <key>NAME</key>
+        <string>MIDI LE USB</string>
+        <key>MUNKI_REPO_SUBDIR</key>
+        <string>apps/midile</string>
+        <key>DESCRIPTION</key>
+        <string>MIDI LE for USB enables you to use a standard Lightning/30-Pin Cable to connect your iOS Device to your Mac. And the best part is: Even Macs without Bluetooth LE can make use of low-latency MIDI connections without any additional hardware now.</string>
+        <key>DISPLAY_NAME</key>
+        <string>%NAME%</string>
+        <key>DEVELOPER</key>
+        <string>Matthias Frick</string>
+        <key>CATEGORY</key>
+        <string>Musik</string>
+        <key>pkginfo</key>
+        <dict>
+            <key>catalogs</key>
+            <array>
+                <string>testing</string>
+            </array>
+            <key>description</key>
+            <string>%DESCRIPTION%</string>
+            <key>name</key>
+            <string>%DISPLAY_NAME%</string>
+            <key>unattended_install</key>
+            <true/>
+            <key>developer</key>
+            <string>%DEVELOPER%</string>
+            <key>category</key>
+            <string>%CATEGORY%</string>
+        </dict>
+    </dict>
+    <key>MinimumVersion</key>
+    <string>0.3.0</string>
+    <key>ParentRecipe</key>
+    <string>com.github.joergflorin.download.MIDI_LE_USB</string>
+    <key>Process</key>
+    <array>
+        <dict>
+            <key>Processor</key>
+            <string>Versioner</string>
+            <key>Arguments</key>
+            <dict>
+                <key>input_plist_path</key>
+                <string>%RECIPE_CACHE_DIR%/%NAME%.dmg/%NAME%.app/Contents/Info.plist</string>
+             </dict>
+        </dict>
+        <dict>
+            <key>Processor</key>
+            <string>MunkiPkginfoMerger</string>
+            <key>Arguments</key>
+            <dict>
+                <key>additional_pkginfo</key>
+                <dict>
+                    <key>version</key>
+                    <string>%version%</string>
+                </dict>
+            </dict>
+       </dict>
+        <dict>
+            <key>Processor</key>
+            <string>MunkiImporter</string>
+            <key>Arguments</key>
+            <dict>
+                <key>pkg_path</key>
+                <string>%RECIPE_CACHE_DIR%/%NAME%.dmg</string>
+                <key>repo_subdirectory</key>
+                <string>%MUNKI_REPO_SUBDIR%</string>
+                <key>version_comparison_key</key>
+                <string>CFBundleShortVersionString</string>
+            </dict>
+        </dict>
+    </array>
+</dict>
+</plist>
