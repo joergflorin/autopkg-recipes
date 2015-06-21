@@ -31,7 +31,7 @@ class ClamScan(Processor):
 	        if retcode == 1:
 	            raise BaseException("download %s is infected by viruses!" % self.env["pathname"])
 	        elif retcode != 0:
-		    raise BaseException("error %s calling clamscan" % retcode)
+		    raise BaseException("error %d calling clamscan" % retcode)
             else:
 		self.output("No pathname set to scan")
         except BaseException as err:
