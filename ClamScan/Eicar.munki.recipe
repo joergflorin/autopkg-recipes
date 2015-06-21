@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Description</key>
+	<string>Downloads Eicar test virus and imports into Munki.</string>
+	<key>Identifier</key>
+	<string>com.github.joergflorin.munki.Eicar</string>
+	<key>Input</key>
+	<dict>
+		<key>NAME</key>
+		<string>Eicar</string>
+		<key>MUNKI_REPO_SUBDIR</key>
+		<string>apps/eicar</string>
+        <key>DESCRIPTION</key>
+        <string>Eicar Test Virus.</string>
+        <key>DISPLAY_NAME</key>
+        <string>%NAME%</string>
+        <key>CATEGORY</key>
+        <string>Dienstprogramme</string>
+		<key>pkginfo</key>
+		<dict>
+			<key>catalogs</key>
+			<array>
+				<string>testing</string>
+			</array>
+			<key>description</key>
+			<string>%DESCRIPTION%</string>
+			<key>display_name</key>
+			<string>%DISPLAY_NAME%</string>
+			<key>name</key>
+			<string>%NAME%</string>
+			<key>unattended_install</key>
+			<true/>
+			<key>category</key>
+			<string>%CATEGORY%</string>
+		</dict>
+	</dict>
+	<key>MinimumVersion</key>
+	<string>0.3.0</string>
+	<key>ParentRecipe</key>
+	<string>com.github.joergflorin.download.Eicar</string>
+	<key>Process</key>
+	<array>
+		<dict>
+            <key>Processor</key>
+            <string>MunkiImporter</string>
+			<key>Arguments</key>
+			<dict>
+				<key>pkg_path</key>
+				<string>%RECIPE_CACHE_DIR%/downloads/Eicar.pkg</string>
+				<key>repo_subdirectory</key>
+				<string>%MUNKI_REPO_SUBDIR%</string>
+				<key>version_comparison_key</key>
+				<string>CFBundleVersion</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
