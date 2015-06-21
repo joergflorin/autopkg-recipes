@@ -13,7 +13,7 @@
         <key>SEARCH_URL</key>
         <string>http://www.steinberg.net/index.php?id=downloads_cubase_pro_8&amp;L=1</string>
         <key>SEARCH_PATTERN</key>
-        <string>(http:\/\/download\.steinberg\.net\/downloads_software\/Cubase_Pro_8_and_Cubase_Artist_8\/[0-9\.]+\/Mac\/Cubase_[0-9\.]+_Update_mac\.dmg)</string>
+        <string>(http:\/\/download\.steinberg\.net\/downloads_software\/cubase_pro_8_and_cubase_artist_8\/[0-9\.]+\/mac\/cubase_[0-9\.]+_update_mac\.dmg)</string>
         
     </dict>
     <key>MinimumVersion</key>
