@@ -15,7 +15,7 @@ class ClamScan(Processor):
     description = __doc__
     input_variables = {
         "pathname": {
-            "required": True,
+            "required": False,
             "description":
                 "Pathname of downloaded artifact."
         }
@@ -25,12 +25,15 @@ class ClamScan(Processor):
 
     def main(self):
         try:
-	    self.output("Scan for viruses in %s." % self.env["pathname"])
-	    retcode = subprocess.call(["clamscan", "--no-summary", self.env["pathname"]])
-	    if retcode == 1:
-	        raise BaseException("download %s is infected by viruses!" % self.env["pathname"])
-	    elif retcode != 0:
-		raise BaseException("error %s calling clamscan" % retcode)
+	    if "pathname" in self.env:
+	        self.output("Scan for viruses in %s." % self.env["pathname"])
+	        retcode = subprocess.call(["clamscan", "--no-summary", self.env["pathname"]])
+	        if retcode == 1:
+	            raise BaseException("download %s is infected by viruses!" % self.env["pathname"])
+	        elif retcode != 0:
+		    raise BaseException("error %s calling clamscan" % retcode)
+            else:
+		self.output("No pathname set to scan")
         except BaseException as err:
             # handle unexpected errors here
             raise ProcessorError(err)
